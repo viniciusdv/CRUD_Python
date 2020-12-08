@@ -1,5 +1,4 @@
 import sqlite3
-
 from model.database import Banco
 
 
@@ -142,14 +141,14 @@ class Usuario():
         try:
 
             c = self.__banco.conexao.cursor()
-
+            print("Entrou")
             c.execute("select * from usuarios where id_usuario = " + id_usuario + "  ")
 
             linha = c.fetchone()
 
             if linha is None:
                 return False, "Usuario não Encontrado"
-
+            print(linha)
             self.set_id(linha[0])
             self.set_nome(linha[1])
             self.set_sexo(linha[2])
@@ -158,11 +157,12 @@ class Usuario():
             self.set_rg_usuario(linha[5])
             self.set_dado_identificador(linha[6])
             self.set_email(linha[7])
-            self.set_telefone(linha[8])
+            self.set_telefone_usuario(linha[8])
             self.set_tipo_usuario(linha[9])
 
+            print("Entrou")
             c.close()
 
-            return True, "Busca feita com sucesso!"
+            return linha, "Busca feita com sucesso!"
         except sqlite3.Error as er:
             return False, "Ocorreu um erro na Busca de Usuarios!"

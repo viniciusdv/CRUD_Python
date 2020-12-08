@@ -11,7 +11,7 @@ class Cadastro_view(tk.Frame):
         self.master = master
         self.pack()
         self.Criar_widget_usuario()
-        self.usuario= Usuario("","","","","","","","","")
+        self.usuario = Usuario("","","","","","","","","")
 
     def Criar_widget_usuario(self):
         # Título
@@ -37,7 +37,7 @@ class Cadastro_view(tk.Frame):
 
         self.botao_buscar = tk.Button(self.container_id)
         self.botao_buscar["text"] = "Buscar"
-        #self.botao_buscar["command"] = self.buscar_funcionario
+        self.botao_buscar["command"] = self.buscar_usuario
         self.botao_buscar.pack(side=tk.LEFT)
 
         # Campo nome
@@ -190,8 +190,26 @@ class Cadastro_view(tk.Frame):
 
         self.mensagem["text"] = "Novo funcionário criado!"
 
+    def buscar_usuario(self):
+        data = self.usuario.select_usuario(self.id.get())
 
-
+        self.nome.delete(0, 100)
+        self.nome.insert(0, data[0][1])
+        self.nascimento.delete(0, 100)
+        self.nascimento.insert(0, data[0][3])
+        self.sexo.set(data[0][2])
+        self.estado_civil.delete(0, 100)
+        self.estado_civil.insert(0, data[0][4])
+        self.rg.delete(0, 100)
+        self.rg.insert(0, data[0][5])
+        self.dado_identificador.delete(0, 100)
+        self.dado_identificador.insert(0, data[0][6])
+        self.email.delete(0, 100)
+        self.email.insert(0, data[0][7])
+        self.telefone.insert(0, 100)
+        self.telefone.insert(0, data[0][8])
+        self.tipo_usuario.delete(0, 100)
+        self.tipo_usuario.insert(0, data[0][9])
 
     def criar_container_padrao(self):
         container = tk.Frame(self.master)

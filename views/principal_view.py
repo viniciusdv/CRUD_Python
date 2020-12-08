@@ -2,7 +2,6 @@ import tkinter as tk
 import tkinter.messagebox
 from tkinter.ttk import *
 
-
 from views.cadastro_view import Cadastro_view
 
 class Menu(tk.Frame):
@@ -28,36 +27,14 @@ class Menu(tk.Frame):
 
         self.botao_usuario = tk.Button(self.container_usuario)
         self.botao_usuario["bg"] = "white"
-        self.botao_usuario["text"] = "CONSULTA DE USUARIOS"
-        self.botao_usuario["font"] = ("Arial", "8", "bold")
-        self.botao_usuario.pack()
-
-        self.container_usuario = tk.Frame(self.master)
-        self.container_usuario["pady"] = 15 # quebra de linha
-        self.container_usuario.pack()
-
-        self.botao_usuario = tk.Button(self.container_usuario)
-        self.botao_usuario["bg"] = "white"
-        self.botao_usuario["text"] = "CADASTRO DE USUARIOS"
+        self.botao_usuario["text"] = "GESTÃO DE USUÁRIOS"
         self.botao_usuario["command"] = self.abrir_cadastro_usuarios
         self.botao_usuario["font"] = ("Arial", "8", "bold")
-        self.botao_usuario.pack()
-
-        self.container_altera_usuario = tk.Frame(self.master)
-        self.container_altera_usuario["pady"] = 15
-        self.container_altera_usuario.pack()
-
-        self.botao_usuario = tk.Button(self.container_altera_usuario)
-        self.botao_usuario["bg"] = "white"
-        self.botao_usuario["text"] = "ALTERAÇÃO DE USUARIOS"
-        self.botao_usuario["font"] = ("Arial", "8", "bold")
-        self.botao_usuario["command"] = self.abrir_cadastro_usuarios
         self.botao_usuario.pack()
 
     def abrir_cadastro_usuarios(self):
         self.nova_tela = tk.Toplevel(self.master)
         self.cadastro_view = Cadastro_view(self.nova_tela)
-
 
 if __name__ == '__main__':
     root = tk.Tk()
