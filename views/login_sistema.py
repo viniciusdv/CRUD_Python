@@ -2,7 +2,7 @@ from tkinter import *
 
 import tkinter.messagebox
 
-#from views.principal_view import Principal_view
+from views.principal_view import Principal_view
 
 
 class Application:
@@ -72,7 +72,7 @@ class Application:
         if usuario == "admin" and senha == "admin123@":
 
             tkinter.messagebox.showinfo(" Login Realizado com Sucesso! : ", "Seja Bem Vindo : " +usuario)
-            self.Abrir_janela_Principal()
+            self.Abrir_janela_Principal
 
         else:
              tkinter.messagebox.showinfo("Login Invalido! ", "Usuario ou Senha Incorretos!")

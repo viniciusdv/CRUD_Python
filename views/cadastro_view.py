@@ -37,7 +37,7 @@ class Cadastro_view(tk.Frame):
 
         self.botao_buscar = tk.Button(self.container_id)
         self.botao_buscar["text"] = "Buscar"
-        #self.botao_buscar["command"] = self.buscar_funcionario
+        #self.botao_buscar["command"] = self.buscar_usuario
         self.botao_buscar.pack(side=tk.LEFT)
 
         # Campo nome
@@ -189,7 +189,6 @@ class Cadastro_view(tk.Frame):
         self.mensagem["text"] = mensagem
 
         self.mensagem["text"] = "Novo funcionário criado!"
-
 
 
 
