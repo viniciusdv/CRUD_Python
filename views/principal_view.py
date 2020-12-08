@@ -2,7 +2,7 @@ import tkinter as tk
 import tkinter.messagebox
 from tkinter.ttk import *
 
-from views.cadastro_view import Cadastro_view
+from crud_python.views.cadastro_view import Cadastro_view
 
 class Menu(tk.Frame):
 

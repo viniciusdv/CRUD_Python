@@ -1,5 +1,5 @@
 import sqlite3
-from model.database import Banco
+from crud_python.model.database import Banco
 
 
 class Usuario():

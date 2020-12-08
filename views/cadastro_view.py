@@ -2,7 +2,7 @@ import tkinter as tk
 
 from tkcalendar import DateEntry
 
-from model.usuario import Usuario
+from crud_python.model.usuario import Usuario
 
 class Cadastro_view(tk.Frame):
 
@@ -138,15 +138,13 @@ class Cadastro_view(tk.Frame):
         self.botao_criar = tk.Button(self.container_botoes)
         self.botao_criar["text"] = "Criar"
         self.botao_criar["command"] = self.add_usuario
-        self.botao_criar["bg"] = "blue"
+        self.botao_criar["bg"] = "green"
         self.botao_criar["fg"] = "white"
         self.botao_criar.pack(side=tk.LEFT)
 
         self.botao_atualizar = tk.Button(self.container_botoes)
         self.botao_atualizar["text"] = "Atualizar"
         #self.botao_atualizar["command"] = self.atualizar_funcionario
-        self.botao_atualizar["bg"] = "green"
-        self.botao_atualizar["fg"] = "white"
         self.botao_atualizar["state"] = "disabled"
         self.botao_atualizar.pack(side=tk.LEFT)
 
