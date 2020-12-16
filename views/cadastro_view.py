@@ -11,7 +11,7 @@ class Cadastro_view(tk.Frame):
         self.master = master
         self.pack()
         self.Criar_widget_usuario()
-        self.usuario= Usuario("","","","","","","","","")
+        self.usuario = Usuario("","","","","","","","","")
 
     def Criar_widget_usuario(self):
         # Título
@@ -27,6 +27,7 @@ class Cadastro_view(tk.Frame):
         self.container_id = self.criar_container_padrao()
 
         self.id_label = tk.Label(self.container_id, text="ID")
+
         self.id_label["width"] = 20
         self.id_label["anchor"] = tk.NW
         self.id_label.pack(side=tk.LEFT)
@@ -36,8 +37,9 @@ class Cadastro_view(tk.Frame):
         self.id.pack(side=tk.LEFT)
 
         self.botao_buscar = tk.Button(self.container_id)
+
         self.botao_buscar["text"] = "Buscar"
-        #self.botao_buscar["command"] = self.buscar_usuario
+        self.botao_buscar["command"] = self.buscar_usuario
         self.botao_buscar.pack(side=tk.LEFT)
 
         # Campo nome
@@ -132,35 +134,30 @@ class Cadastro_view(tk.Frame):
         self.tipo_usuario["width"] = 20
         self.tipo_usuario.pack(side=tk.LEFT)
 
-
         # Botões
         self.container_botoes = self.criar_container_padrao()
         self.botao_criar = tk.Button(self.container_botoes)
         self.botao_criar["text"] = "Criar"
         self.botao_criar["command"] = self.add_usuario
-        self.botao_criar["bg"] = "blue"
+        self.botao_criar["bg"] = "green"
         self.botao_criar["fg"] = "white"
         self.botao_criar.pack(side=tk.LEFT)
 
         self.botao_atualizar = tk.Button(self.container_botoes)
         self.botao_atualizar["text"] = "Atualizar"
-        #self.botao_atualizar["command"] = self.atualizar_funcionario
-        self.botao_atualizar["bg"] = "green"
-        self.botao_atualizar["fg"] = "white"
-        self.botao_atualizar["state"] = "disabled"
+        self.botao_atualizar["command"] = self.atualizar_usuario
         self.botao_atualizar.pack(side=tk.LEFT)
 
         self.botao_excluir = tk.Button(self.container_botoes)
         self.botao_excluir["text"] = "Excluir"
-        #self.botao_excluir["command"] = self.excluir_funcionario
+        self.botao_excluir["command"] = self.excluir_usuario
         self.botao_excluir["bg"] = "red"
         self.botao_excluir["fg"] = "white"
-        self.botao_excluir["state"] = "disabled"
         self.botao_excluir.pack(side=tk.LEFT)
 
         self.botao_limpar = tk.Button(self.container_botoes)
         self.botao_limpar["text"] = "Limpar"
-        #self.botao_limpar["command"] = self.limpar_tela
+        self.botao_limpar["command"] = self.limpa_tela
         self.botao_limpar.pack()
 
         # Mensagem
@@ -169,6 +166,7 @@ class Cadastro_view(tk.Frame):
         self.mensagem.pack()
 
     def add_usuario(self):
+
         self.usuario.set_nome(self.nome.get())
         self.usuario.set_sexo(self.sexo.get())
         self.usuario.set_data_nasc(self.nascimento.get())
@@ -182,14 +180,94 @@ class Cadastro_view(tk.Frame):
         status, id_gerado, mensagem = self.usuario.insert_usuario()
         if status:
             self.id.insert(0, id_gerado)
+
             self.botao_criar.config(state="disabled")
             self.botao_excluir.config(state="normal")
             self.botao_atualizar.config(state="normal")
+            self.mensagem["text"] = mensagem
+            self.mensagem["text"] = "Novo Usuario criado!"
+            self.limpa_tela()
 
-        self.mensagem["text"] = mensagem
+    def atualizar_usuario(self):
 
-        self.mensagem["text"] = "Novo funcionário criado!"
+        self.usuario.set_nome(self.nome.get())
+        self.usuario.set_data_nasc(self.nascimento.get())
+        self.usuario.set_sexo(self.sexo.get())
+        self.usuario.set_estado_civil(self.estado_civil.get())
+        self.usuario.set_rg_usuario(self.rg.get())
+        self.usuario.set_dado_identificador(self.dado_identificador.get())
+        self.usuario.set_email(self.email.get())
+        self.usuario.set_telefone_usuario(self.telefone.get())
+        self.usuario.set_tipo_usuario(self.tipo_usuario.get())
 
+        print(self.telefone.get())
+
+        status, mensagem = self.usuario.update_usuario()
+
+        if status:
+         self.mensagem["text"] = mensagem
+         tk.messagebox.showinfo(" Alteração realizada com Sucesso!")
+         self.limpa_tela()
+
+        else:
+
+         self.mensagem["text"] = mensagem
+         self.mensagem["text"] = "erro"
+
+
+
+    def buscar_usuario(self):
+
+        data = self.usuario.select_usuario(self.id.get())
+
+        self.nome.delete(0, 100)
+        self.nome.insert(0, data[0][1])
+        self.nascimento.delete(0, 100)
+        self.nascimento.insert(0, data[0][3])
+        self.sexo.set(data[0][2])
+        self.estado_civil.delete(0, 100)
+        self.estado_civil.insert(0, data[0][4])
+        self.rg.delete(0, 100)
+        self.rg.insert(0, data[0][5])
+        self.dado_identificador.delete(0, 100)
+        self.dado_identificador.insert(0, data[0][6])
+        self.email.delete(0, 100)
+        self.email.insert(0, data[0][7])
+        self.telefone.insert(0, 100)
+        self.telefone.insert(0, data[0][8])
+        self.tipo_usuario.delete(0, 100)
+        self.tipo_usuario.insert(0, data[0][9])
+
+    def excluir_usuario(self):
+
+        self.usuario.set_id(self.id.get())
+        status, mensagem = self.usuario.delete_usuario()
+
+        if status:
+            self.mensagem["text"] = "Usuario Deletado com Sucesso !"
+
+            self.mensagem["text"] = mensagem
+
+            self.limpa_tela()
+
+        if status:
+
+            self.mensagem["text"] = mensagem
+
+
+
+    def limpa_tela(self):
+
+        self.id.delete(0, tk.END)
+        self.nome.delete(0, tk.END)
+        self.nascimento.delete(0, tk.END)
+        self.rg.delete(0, tk.END)
+        self.dado_identificador.delete(0, tk.END)
+        self.estado_civil.delete(0, tk.END)
+        self.nascimento.delete(0, tk.END)
+        self.telefone.delete(0, tk.END)
+        self.email.delete(0, tk.END)
+        self.tipo_usuario.delete(0, tk.END)
 
 
     def criar_container_padrao(self):

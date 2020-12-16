@@ -110,15 +110,19 @@ class Usuario():
         try:
 
             c = self.__banco.conexao.cursor()
-
             c.execute(
-                "update usuarios set nome_usuario = '" + self.get_nome() + "', sexo_usuario = '" + self.get_sexo() + "', data_nasc_usuario = '" + self.get_data_nasc() + "', estado_civil = '" + self.get_estado_civil() +
-                "',estado_civil'" + self.get_estado_civil() + "', rg_usuario'" + self.get_rg_usuario() + "',dado_identificador_usuario'" + self.get_dado_identificador() +  "', email_usuario'" + self.get_email() +
-                "', telefone_usuario'" + self.get_telefone_usuario() + "', tipo_usuario'" + self.get_tipo_usuario()+ "' where id_usuario = " + str(
-                  self.get_id()) + " ")
+                "update usuarios set nome_usuario = '" + self.get_nome() + "', sexo_usuario = '" + self.get_sexo() + "', data_nasc_usuario = '" + self.get_data_nasc() + "', estado_civil = '" + str(
+                    self.get_estado_civil()) + "', rg_usuario = '" + self.get_rg_usuario() + "', dado_identificador_usuario = '" + str(
+                    self.get_dado_identificador()) +  "', email_usuario = '" + str(self.get_email()) + "', telefone_usuario ='" + self.get_telefone_usuario() + "' , tipo_usuario = '" +
+                    self.get_tipo_usuario() + "' where id_usuario = " + str(
+                    self.get_id()) + " ")
+
+
 
             self.__banco.conexao.commit()
             c.close()
+
+            print(c)
 
             return True, "Usuario atualizado com Sucesso!"
         except sqlite3.Error as er:
@@ -142,14 +146,14 @@ class Usuario():
         try:
 
             c = self.__banco.conexao.cursor()
-
+            print("Entrou")
             c.execute("select * from usuarios where id_usuario = " + id_usuario + "  ")
 
             linha = c.fetchone()
 
             if linha is None:
                 return False, "Usuario não Encontrado"
-
+            print(linha)
             self.set_id(linha[0])
             self.set_nome(linha[1])
             self.set_sexo(linha[2])
@@ -158,11 +162,12 @@ class Usuario():
             self.set_rg_usuario(linha[5])
             self.set_dado_identificador(linha[6])
             self.set_email(linha[7])
-            self.set_telefone(linha[8])
+            self.set_telefone_usuario(linha[8])
             self.set_tipo_usuario(linha[9])
 
+            print("Entrou")
             c.close()
 
-            return True, "Busca feita com sucesso!"
+            return linha, "Busca feita com sucesso!"
         except sqlite3.Error as er:
             return False, "Ocorreu um erro na Busca de Usuarios!"
