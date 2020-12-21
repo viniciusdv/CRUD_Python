@@ -117,8 +117,6 @@ class Usuario():
                     self.get_tipo_usuario() + "' where id_usuario = " + str(
                     self.get_id()) + " ")
 
-
-
             self.__banco.conexao.commit()
             c.close()
 

@@ -181,11 +181,11 @@ class Cadastro_view(tk.Frame):
         if status:
             self.id.insert(0, id_gerado)
 
-            self.botao_criar.config(state="disabled")
+            self.botao_criar.config(state="normal")
             self.botao_excluir.config(state="normal")
             self.botao_atualizar.config(state="normal")
             self.mensagem["text"] = mensagem
-            self.mensagem["text"] = "Novo Usuario criado!"
+            self.mensagem["text"] = "Novo Usuario criado! "
             self.limpa_tela()
 
     def atualizar_usuario(self):
@@ -206,7 +206,7 @@ class Cadastro_view(tk.Frame):
 
         if status:
          self.mensagem["text"] = mensagem
-         tk.messagebox.showinfo(" Alteração realizada com Sucesso!")
+         self.mensagem["text"] = "Usuario Atualizado Com Sucesso !"
          self.limpa_tela()
 
         else:
@@ -249,16 +249,14 @@ class Cadastro_view(tk.Frame):
             self.mensagem["text"] = mensagem
 
             self.limpa_tela()
+            self.mensagem["text"] = ""
 
         if status:
 
             self.mensagem["text"] = mensagem
 
-
-
     def limpa_tela(self):
 
-        self.id.delete(0, tk.END)
         self.nome.delete(0, tk.END)
         self.nascimento.delete(0, tk.END)
         self.rg.delete(0, tk.END)
@@ -268,6 +266,7 @@ class Cadastro_view(tk.Frame):
         self.telefone.delete(0, tk.END)
         self.email.delete(0, tk.END)
         self.tipo_usuario.delete(0, tk.END)
+        self.mensagem["text"] = ""
 
 
     def criar_container_padrao(self):
