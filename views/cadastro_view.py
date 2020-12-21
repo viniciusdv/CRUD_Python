@@ -2,7 +2,7 @@ import tkinter as tk
 
 from tkcalendar import DateEntry
 
-from model.usuario import Usuario
+from crud_python.model.usuario import Usuario
 
 class Cadastro_view(tk.Frame):
 
@@ -41,6 +41,7 @@ class Cadastro_view(tk.Frame):
         self.botao_buscar["text"] = "Buscar"
         self.botao_buscar["command"] = self.buscar_usuario
         self.botao_buscar.pack(side=tk.LEFT)
+        self.botao_buscar.pack(padx=8)
 
         # Campo nome
         self.container_nome = self.criar_container_padrao()
@@ -142,11 +143,14 @@ class Cadastro_view(tk.Frame):
         self.botao_criar["bg"] = "green"
         self.botao_criar["fg"] = "white"
         self.botao_criar.pack(side=tk.LEFT)
+        self.botao_criar.pack(padx=8)
+
 
         self.botao_atualizar = tk.Button(self.container_botoes)
         self.botao_atualizar["text"] = "Atualizar"
         self.botao_atualizar["command"] = self.atualizar_usuario
         self.botao_atualizar.pack(side=tk.LEFT)
+        self.botao_atualizar.pack(padx=8)
 
         self.botao_excluir = tk.Button(self.container_botoes)
         self.botao_excluir["text"] = "Excluir"
@@ -154,11 +158,13 @@ class Cadastro_view(tk.Frame):
         self.botao_excluir["bg"] = "red"
         self.botao_excluir["fg"] = "white"
         self.botao_excluir.pack(side=tk.LEFT)
+        self.botao_excluir.pack(padx=8)
 
         self.botao_limpar = tk.Button(self.container_botoes)
         self.botao_limpar["text"] = "Limpar"
         self.botao_limpar["command"] = self.limpa_tela
         self.botao_limpar.pack()
+        self.botao_limpar.pack(padx=8)
 
         # Mensagem
         self.container_mensagem = self.criar_container_padrao()
