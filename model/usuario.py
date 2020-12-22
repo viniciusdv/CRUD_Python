@@ -102,7 +102,7 @@ class Usuario():
             self.__banco.conexao.commit()
             c.close()
 
-            return True, id_gerado, "Usuario Cadastro com Sucesso!"
+            return True, id_gerado, "Usuario Cadastro com Sucesso! , ID: " + str(id_gerado)
         except sqlite3.Error as er:
             return False, 0, "Erro ao inserir Usuario!"
 
@@ -122,7 +122,7 @@ class Usuario():
 
             print(c)
 
-            return True, "Usuario atualizado com Sucesso!"
+            return True, "Usuario :  , "  + self.get_nome()+ "  Atualizado com Sucesso!"
         except sqlite3.Error as er:
             return False, "Falha ao Alterar Usuario"
 
@@ -136,7 +136,7 @@ class Usuario():
             self.__banco.conexao.commit()
             c.close()
 
-            return True, "Usuario Deletado com Sucesso!"
+            return True, "Usuario :  " +str(self.get_id())+ "  Deletado com Sucesso!"
         except sqlite3.Error as er:
             return False, "Falha ao Deletar Usuario"
 

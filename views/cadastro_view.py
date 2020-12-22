@@ -41,6 +41,7 @@ class Cadastro_view(tk.Frame):
         self.botao_buscar["text"] = "Buscar"
         self.botao_buscar["command"] = self.buscar_usuario
         self.botao_buscar.pack(side=tk.LEFT)
+        self.botao_buscar.pack(padx=8)
 
         # Campo nome
         self.container_nome = self.criar_container_padrao()
@@ -142,11 +143,14 @@ class Cadastro_view(tk.Frame):
         self.botao_criar["bg"] = "green"
         self.botao_criar["fg"] = "white"
         self.botao_criar.pack(side=tk.LEFT)
+        self.botao_criar.pack(padx=8)
+
 
         self.botao_atualizar = tk.Button(self.container_botoes)
         self.botao_atualizar["text"] = "Atualizar"
         self.botao_atualizar["command"] = self.atualizar_usuario
         self.botao_atualizar.pack(side=tk.LEFT)
+        self.botao_atualizar.pack(padx=8)
 
         self.botao_excluir = tk.Button(self.container_botoes)
         self.botao_excluir["text"] = "Excluir"
@@ -154,11 +158,13 @@ class Cadastro_view(tk.Frame):
         self.botao_excluir["bg"] = "red"
         self.botao_excluir["fg"] = "white"
         self.botao_excluir.pack(side=tk.LEFT)
+        self.botao_excluir.pack(padx=8)
 
         self.botao_limpar = tk.Button(self.container_botoes)
         self.botao_limpar["text"] = "Limpar"
         self.botao_limpar["command"] = self.limpa_tela
         self.botao_limpar.pack()
+        self.botao_limpar.pack(padx=8)
 
         # Mensagem
         self.container_mensagem = self.criar_container_padrao()
@@ -185,7 +191,7 @@ class Cadastro_view(tk.Frame):
             self.botao_excluir.config(state="normal")
             self.botao_atualizar.config(state="normal")
             self.mensagem["text"] = mensagem
-            self.mensagem["text"] = "Novo Usuario criado! "
+            self.mensagem["text"] = "Novo Usuario criado ! ID: " +(id_gerado)
             self.limpa_tela()
 
     def atualizar_usuario(self):
@@ -200,19 +206,18 @@ class Cadastro_view(tk.Frame):
         self.usuario.set_telefone_usuario(self.telefone.get())
         self.usuario.set_tipo_usuario(self.tipo_usuario.get())
 
-        print(self.telefone.get())
-
         status, mensagem = self.usuario.update_usuario()
 
         if status:
+
          self.mensagem["text"] = mensagem
-         self.mensagem["text"] = "Usuario Atualizado Com Sucesso !"
+         self.mensagem ["text"] = "Usuario :  , " + self.get_nome() + "  Atualizado com Sucesso!"
          self.limpa_tela()
 
         else:
 
-         self.mensagem["text"] = mensagem
-         self.mensagem["text"] = "erro"
+         self.mensagem["text"] = "Falha ao Atualizar Usuario"
+         self.limpa_tela()
 
 
 
@@ -257,6 +262,7 @@ class Cadastro_view(tk.Frame):
 
     def limpa_tela(self):
 
+        self.id.delete(0 , tk.END)
         self.nome.delete(0, tk.END)
         self.nascimento.delete(0, tk.END)
         self.rg.delete(0, tk.END)
