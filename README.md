@@ -1,6 +1,6 @@
 ### Crud Python e Tkinter
 
-Crud de clientes utlizando python e interface Tkinter.
+Crud de clientes utilizando python e interface Tkinter.
 
 Base de Dados local com Sqlite.
 
